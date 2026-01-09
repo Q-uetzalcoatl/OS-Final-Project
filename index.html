@@ -1,95 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kernel Architectures</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kernel Architecture Explained</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
-    <section class="kernel-section">
-        <h1>The Three Kernel Architectures</h1>
+<canvas id="bgCanvas"></canvas>
 
-        <div class="grid-container">
+<nav id="navbar">
+  <div class="logo">
+    <img src="kernel.png" alt="Kernel Logo">
+  </div>
+  <ul>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#whatKernel">What is Kernel?</a></li>
+    <li><a href="#architectures">Architectures</a></li>
+    <li><a href="#comparison">Comparison</a></li>
+    <li><a href="#terminalSection">Terminal</a></li>
+  </ul>
+</nav>
 
-            <div class="card">
-                <h2>Monolithic Kernel</h2>
-                <p class="description">
-                    Everything is inside one big block. It is fast since parts talk directly. If one part breaks, the whole system can crash.
-                    <br><em>Example: Linux</em>
-                </p>
-                
-                <div class="diagram-box">
-                    <span class="mode-label user-mode-label">User Mode</span>
-                    <div class="block app-layer">Applications</div>
-                    
-                    <div class="separator"></div>
-                    
-                    <span class="mode-label kernel-mode-label">Kernel Mode</span>
-                    <div class="block mono-kernel">
-                        <div class="mono-core-text">Main Kernel</div>
-                        <div class="mono-sub">
-                            <div class="mono-item">File Sys</div>
-                            <div class="mono-item">Drivers</div>
-                            <div class="mono-item">IPC</div>
-                        </div>
-                    </div>
-                </div>
+<section id="hero" class="hero reveal">
+  <h1>THE CORE: Understanding Kernel Architecture</h1>
+  <p>The unseen engine powering every device you own.</p>
+  <button id="startBtn">Start System</button>
+</section>
+
+<section id="whatKernel" class="reveal">
+  <h2>What is a Kernel?</h2>
+  <p>
+    The kernel is the main control center of an operating system. It talks to your hardware and your apps. Phones, laptops, consoles, and ATMs rely on it.
+  </p>
+  <p>
+    Think of a busy restaurant. The customers are apps. The kitchen is hardware. The manager listens to orders, coordinates workers, prevents accidents, and makes sure food is served.  
+    That manager is the kernel.
+  </p>
+</section>
+
+<section id="architectures" class="reveal">
+  <h2>The Three Kernel Architectures</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Monolithic Kernel</h3>
+      <p>
+        Everything is inside one big block. It is fast since parts talk directly. If one part breaks, the whole system can crash.  
+        Example: Linux
+      </p>
+
+      <div class="diagram-container">
+        <span class="mode-label user-label">User Mode</span>
+        <div class="layer app-layer">Applications</div>
+        
+        <div class="boundary-line"></div>
+        
+        <span class="mode-label kernel-label">Kernel Mode</span>
+        <div class="layer kernel-big-box">
+            <div class="kernel-text">Main Kernel</div>
+            <div class="kernel-modules">
+                <span>File Sys</span>
+                <span>Drivers</span>
+                <span>IPC</span>
             </div>
-
-            <div class="card">
-                <h2>Microkernel</h2>
-                <p class="description">
-                    Only basics stay in the center. Services like drivers and file systems live outside in User Mode.
-                    <br><em>Example: Minix</em>
-                </p>
-
-                <div class="diagram-box">
-                    <span class="mode-label user-mode-label">User Mode</span>
-                    <div class="block app-layer">Applications</div>
-
-                    <div class="micro-user-space">
-                        <div class="block micro-service">File Server</div>
-                        <div class="block micro-service">Device Driver</div>
-                        <div class="block micro-service">Unix Server</div>
-                    </div>
-
-                    <div class="separator"></div>
-
-                    <span class="mode-label kernel-mode-label">Kernel Mode</span>
-                    <div class="block micro-core">
-                        Basic IPC & Sched
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <h2>Hybrid Kernel</h2>
-                <p class="description">
-                    Mix of both styles. Some non-essential drivers are moved out, but critical drivers stay inside for speed.
-                    <br><em>Example: Windows NT, macOS</em>
-                </p>
-
-                <div class="diagram-box">
-                    <span class="mode-label user-mode-label">User Mode</span>
-                    <div class="hybrid-user-row">
-                        <div class="block micro-service" style="width: 45%;">Applications</div>
-                        <div class="block micro-service" style="width: 45%;">User Servers</div>
-                    </div>
-
-                    <div class="separator"></div>
-
-                    <span class="mode-label kernel-mode-label">Kernel Mode</span>
-                    <div class="block hybrid-kernel-row">
-                        <div class="mono-item" style="flex: 2;">Drivers & IPC</div>
-                        <div class="mono-item" style="flex: 1;">Kernel Core</div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </section>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Microkernel</h3>
+      <p>
+        Only basics stay in the center. Other services live around it. More stable and safer but sometimes slower due to extra communication.  
+        Example: Minix
+      </p>
+
+      <div class="diagram-container">
+        <span class="mode-label user-label">User Mode</span>
+        <div class="layer app-layer">Applications</div>
+
+        <div class="micro-services">
+            <div class="service-box">File Srv</div>
+            <div class="service-box">Drivers</div>
+            <div class="service-box">Unix Srv</div>
+        </div>
+        
+        <div class="boundary-line"></div>
+        
+        <span class="mode-label kernel-label">Kernel Mode</span>
+        <div class="layer kernel-tiny-box">
+            <span>Basic IPC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Hybrid Kernel</h3>
+      <p>
+        Mix of both styles. Some parts are grouped for speed. Others stay separate for safety.  
+        Examples: Windows NT, macOS
+      </p>
+
+      <div class="diagram-container">
+        <span class="mode-label user-label">User Mode</span>
+        <div class="micro-services hybrid-top">
+             <div class="service-box wide">Applications</div>
+             <div class="service-box wide">User Servers</div>
+        </div>
+        
+        <div class="boundary-line"></div>
+        
+        <span class="mode-label kernel-label">Kernel Mode</span>
+        <div class="layer kernel-hybrid-box">
+            <div class="kernel-modules">
+                <span style="flex:2">Drivers & IPC</span>
+                <span style="flex:1">Core</span>
+            </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="comparison" class="reveal">
+  <h2>Comparison Table</h2>
+
+  <table>
+    <tr>
+      <th>Architecture</th>
+      <th>Speed</th>
+      <th>Stability</th>
+      <th>Security</th>
+    </tr>
+    <tr>
+      <td>Monolithic</td>
+      <td>High</td>
+      <td>Medium</td>
+      <td>Depends on design</td>
+    </tr>
+    <tr>
+      <td>Microkernel</td>
+      <td>Medium</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Hybrid</td>
+      <td>High</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+  </table>
+</section>
+
+<section id="terminalSection" class="reveal">
+  <h2>Kernel Diagnostic Terminal</h2>
+
+  <div class="terminal" id="terminalBox">
+    > Awaiting command...
+  </div>
+  <br>
+  <button id="diagBtn">Run Diagnostics</button>
+</section>
+
+<audio id="clickSound" src="click.wav"></audio>
+<audio id="bootSound" src="boot.mp3"></audio>
+
+<script src="script.js"></script>
 
 </body>
-  </html>
+    </html>
