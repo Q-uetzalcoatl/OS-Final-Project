@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kernel Architecture Explained</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<canvas id="bgCanvas"></canvas>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <div class="logo">KERNEL CORE</div>
+  <ul>
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#whatKernel">What is Kernel?</a></li>
+    <li><a href="#architectures">Architectures</a></li>
+    <li><a href="#comparison">Comparison</a></li>
+    <li><a href="#terminalSection">Terminal</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero" class="hero reveal">
+  <h1>THE CORE: Understanding Kernel Architecture</h1>
+  <p>The unseen engine powering every device you own.</p>
+  <button id="startBtn">Start System</button>
+</section>
+
+<!-- WHAT IS KERNEL -->
+<section id="whatKernel" class="reveal">
+  <h2>What is a Kernel?</h2>
+  <p>
+    The kernel is the main control center of an operating system. It talks to your hardware and your apps. Phones, laptops, consoles, and ATMs rely on it.
+  </p>
+  <p>
+    Think of a busy restaurant. The customers are apps. The kitchen is hardware. The manager listens to orders, coordinates workers, prevents accidents, and makes sure food is served.  
+    That manager is the kernel.
+  </p>
+</section>
+
+<!-- ARCHITECTURES -->
+<section id="architectures" class="reveal">
+  <h2>The Three Kernel Architectures</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>Monolithic Kernel</h3>
+      <p>
+        Everything is inside one big block. It is fast since parts talk directly. If one part breaks, the whole system can crash.  
+        Example: Linux
+      </p>
+
+      <div class="diagram">
+        <strong>Single Big Core</strong>
+        <div class="mono-box"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Microkernel</h3>
+      <p>
+        Only basics stay in the center. Other services live around it. More stable and safer but sometimes slower due to extra communication.  
+        Example: Minix
+      </p>
+
+      <div class="diagram">
+        <strong>Small Core + Services</strong>
+        <div class="small-box"></div>
+        <div class="small-box"></div>
+        <div class="small-box"></div>
+        <div class="tiny-core"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Hybrid Kernel</h3>
+      <p>
+        Mix of both styles. Some parts are grouped for speed. Others stay separate for safety.  
+        Examples: Windows NT, macOS
+      </p>
+
+      <div class="diagram">
+        <strong>Core Plus Add ons</strong>
+        <div class="hybrid-core"></div>
+        <div class="small-box"></div>
+        <div class="small-box"></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section id="comparison" class="reveal">
+  <h2>Comparison Table</h2>
+
+  <table>
+    <tr>
+      <th>Architecture</th>
+      <th>Speed</th>
+      <th>Stability</th>
+      <th>Security</th>
+    </tr>
+    <tr>
+      <td>Monolithic</td>
+      <td>High</td>
+      <td>Medium</td>
+      <td>Depends on design</td>
+    </tr>
+    <tr>
+      <td>Microkernel</td>
+      <td>Medium</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Hybrid</td>
+      <td>High</td>
+      <td>High</td>
+      <td>High</td>
+    </tr>
+  </table>
+</section>
+
+<!-- TERMINAL -->
+<section id="terminalSection" class="reveal">
+  <h2>Kernel Diagnostic Terminal</h2>
+
+  <div class="terminal" id="terminalBox">
+    > Awaiting command...
+  </div>
+  <br>
+  <button id="diagBtn">Run Diagnostics</button>
+</section>
+
+<!-- Sounds -->
+<audio id="clickSound" src="click.wav"></audio>
+<audio id="bootSound" src="boot.wav"></audio>
+
+<script src="script.js"></script>
+
+</body>
+  </html>
+    
