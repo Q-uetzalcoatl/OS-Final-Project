@@ -1,14 +1,13 @@
 /* GLOBAL RESET & BODY */
 body {
   margin: 0;
-  /* Push content down so it's not hidden behind the fixed navbar */
-  padding-top: 90px; 
+  padding-top: 90px; /* Space for the fixed navbar */
   background: #050505;
   color: white;
   font-family: Arial, sans-serif;
 }
 
-/* CANVAS BACKGROUND (Layered behind everything) */
+/* CANVAS BACKGROUND (Behind everything) */
 #bgCanvas {
   position: fixed;
   top: 0;
@@ -22,37 +21,34 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  height: 80px; /* Default height for desktop */
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* Added box-sizing so padding doesn't make it wider than 100% */
-  box-sizing: border-box; 
   padding: 0 20px;
-  background: rgba(5, 5, 5, 0.9);
+  background: rgba(5, 5, 5, 0.95); /* Nearly black background */
   backdrop-filter: blur(6px);
   z-index: 1000;
   box-shadow: 0 0 15px #00ff41;
+  box-sizing: border-box; /* Ensures padding doesn't break width */
 }
 
-/* --- LOGO FIX STARTS HERE --- */
+/* --- LOGO FIX --- */
 .logo {
-  /* Stop the container from getting squished or massive */
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  max-width: 250px; /* Safety cap so it never takes up whole screen */
+  max-width: 250px; 
 }
 
 .logo img {
-  height: 55px;       /* Keep the height consistent */
-  width: auto;        /* Let width adjust automatically */
-  max-width: 100%;    /* Never let it be wider than its container */
-  object-fit: contain; 
-  display: block;     
+  height: 55px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
 }
-/* --- LOGO FIX ENDS HERE --- */
 
 /* NAVBAR LINKS */
 #navbar ul {
@@ -80,8 +76,8 @@ section {
   position: relative;
   z-index: 10;
   padding: 60px 20px;
-  max-width: 1200px; /* Keeps text from stretching too wide on big screens */
-  margin: 0 auto;    /* Centers the content */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* CARD LAYOUT */
@@ -93,10 +89,10 @@ section {
 
 .card {
   flex: 1;
-  min-width: 280px; /* Made slightly wider for better readability */
+  min-width: 280px;
   border: 1px solid #00ff41;
   padding: 20px;
-  background: rgba(0, 0, 0, 0.5); /* Slight dark tint inside card */
+  background: rgba(0, 0, 0, 0.7); /* Darker card background for readability */
   box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -106,45 +102,63 @@ section {
   box-shadow: 0 0 25px rgba(0, 255, 65, 0.6);
 }
 
-/* DIAGRAM SHAPES */
+/* --- DIAGRAMS (Darker/Tech Style) --- */
 .diagram {
-  margin-top: 15px;
+  margin-top: 20px;
   padding-top: 15px;
   border-top: 1px dashed #333;
+  text-align: center;
 }
 
+.diagram strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #00ff41;
+  font-family: "Courier New", monospace;
+  font-size: 0.9rem;
+}
+
+/* Monolithic Box */
 .mono-box {
-  width: 100%;
-  height: 80px;
-  background: #00ff41;
-  box-shadow: 0 0 10px #00ff41;
+  width: 80%;
+  height: 60px;
+  margin: 0 auto;
+  background: rgba(0, 255, 65, 0.15); /* Transparent Green */
+  border: 2px solid #00ff41;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
 }
 
-.small-box {
-  width: 60px;
-  height: 40px;
-  background: #39ff14;
-  display: inline-block;
-  margin: 5px;
-  border: 1px solid #000;
-}
-
+/* Microkernel Boxes */
 .tiny-core {
   width: 50px;
   height: 50px;
-  background: cyan;
+  background: rgba(0, 255, 255, 0.1); /* Transparent Cyan */
+  border: 2px solid cyan;
   display: inline-block;
-  box-shadow: 0 0 10px cyan;
   vertical-align: middle;
+  box-shadow: 0 0 8px cyan;
 }
 
-.hybrid-core {
-  width: 100px;
-  height: 60px;
-  background: #00ff41;
+.small-box {
+  width: 50px;
+  height: 40px;
+  background: black;
+  border: 1px solid #39ff14;
+  color: #39ff14;
   display: inline-block;
   margin: 5px;
   vertical-align: middle;
+}
+
+/* Hybrid Box */
+.hybrid-core {
+  width: 100px;
+  height: 60px;
+  background: rgba(0, 255, 65, 0.15);
+  border: 2px solid #00ff41;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 5px;
 }
 
 /* COMPARISON TABLE */
@@ -167,7 +181,7 @@ th {
 }
 
 td {
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 
 /* TERMINAL */
@@ -200,37 +214,31 @@ button:hover {
   box-shadow: 0 0 25px #00ff41;
 }
 
-/* --- MOBILE & RESPONSIVE FIXES --- */
+/* --- MOBILE RESPONSIVE FIX --- */
 @media (max-width: 768px) {
-  
-  /* 1. Fix Navbar Height so it grows */
   #navbar {
-    height: auto; /* Let it grow to fit the logo and links */
+    height: auto; /* Lets the height grow if needed */
     min-height: 100px;
     flex-direction: column;
     justify-content: center;
     padding: 15px;
   }
 
-  /* 2. Space out the logo on mobile */
   .logo {
-    margin-bottom: 10px;
+    margin-bottom: 10px; /* Space under logo on mobile */
   }
 
-  /* 3. Push body content down further so it doesn't hide behind nav */
   body {
-    padding-top: 160px;
+    padding-top: 160px; /* Push content down so nav doesn't cover it */
   }
 
-  /* 4. Fix Link spacing on small screens */
   #navbar ul {
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
   }
 
-  /* 5. Stack cards vertically */
   .cards {
     flex-direction: column;
   }
-  }
+    }
