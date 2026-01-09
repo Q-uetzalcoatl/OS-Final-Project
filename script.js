@@ -1,81 +1,77 @@
-// Background matrix canvas animation
+// Background canvas animation
 const canvas = document.getElementById("bgCanvas");
 const ctx = canvas.getContext("2d");
 
-canvas.height = window.innerHeight;
 canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-let drops = [];
-const fontSize = 14;
-const columns = canvas.width / fontSize;
+const dots = [];
 
-for (let x = 0; x < columns; x++) drops[x] = 1;
+for (let i = 0; i < 60; i++) {
+  dots.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1,
+    vx: (Math.random() - 0.5) * 0.6,
+    vy: (Math.random() - 0.5) * 0.6
+  });
+}
 
-function drawMatrix() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.07)";
+function animate() {
+  ctx.fillStyle = "rgba(0,0,0,0.3)";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.fillStyle = "#00ff41";
-  ctx.font = fontSize + "px monospace";
 
-  for (let i = 0; i < drops.length; i++) {
-    const text = String.fromCharCode(0x30A0 + Math.random() * 96);
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+  dots.forEach(d => {
+    d.x += d.vx;
+    d.y += d.vy;
 
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) drops[i] = 0;
+    if (d.x < 0 || d.x > canvas.width) d.vx *= -1;
+    if (d.y < 0 || d.y > canvas.height) d.vy *= -1;
 
-    drops[i]++;
-  }
-}
-setInterval(drawMatrix, 35);
-
-// Scroll reveal
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) entry.target.classList.add("visible");
+    ctx.beginPath();
+    ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
+    ctx.fill();
   });
-});
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-// Sounds
+  requestAnimationFrame(animate);
+}
+
+animate();
+
+// Sound effects
 const clickSound = document.getElementById("clickSound");
 const bootSound = document.getElementById("bootSound");
 
-// Start button scroll and sound
+// Start button
 document.getElementById("startBtn").addEventListener("click", () => {
-  clickSound.play();
-  document.getElementById("whatKernel").scrollIntoView({ behavior: "smooth" });
+  bootSound.play();
+  window.scrollTo({ top: window.innerHeight, behavior: "smooth" });
 });
 
-// Terminal diagnostic typing effect
+// Diagnostics terminal
 document.getElementById("diagBtn").addEventListener("click", () => {
-  bootSound.play();
+  clickSound.play();
+
   const box = document.getElementById("terminalBox");
-  const message = [
-    "> Boot sequence initiated...",
-    "> Checking kernel modules...",
-    "> Verifying memory access...",
-    "> Scheduling processes...",
-    "> Kernel status: ONLINE and STABLE"
+  box.innerText = "> Running diagnostic...\n";
+
+  let msg = [
+    "Kernel detected",
+    "Memory map stable",
+    "Process scheduler active",
+    "System secure",
+    "All systems online"
   ];
 
-  box.innerHTML = "";
-  let line = 0;
-
-  function typeLine() {
-    if (line >= message.length) return;
-    let charIndex = 0;
-    const current = message[line];
-    const interval = setInterval(() => {
-      box.innerHTML += current[charIndex];
-      charIndex++;
-      if (charIndex === current.length) {
-        clearInterval(interval);
-        box.innerHTML += "<br>";
-        line++;
-        setTimeout(typeLine, 300);
-      }
-    }, 30);
-  }
-  typeLine();
+  let i = 0;
+  let interval = setInterval(() => {
+    if (i >= msg.length) {
+      clearInterval(interval);
+      return;
+    }
+    box.innerText += msg[i] + "\n";
+    i++;
+  }, 500);
 });
